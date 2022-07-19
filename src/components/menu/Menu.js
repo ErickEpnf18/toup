@@ -8,84 +8,127 @@ import {
   IonMenu,
   IonMenuToggle,
   IonNote,
-} from '@ionic/react';
+} from "@ionic/react";
 
-import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
-import './Menu.css';
+import { useLocation, Link } from "react-router-dom";
+import {
+  restaurantOutline,
+  restaurantSharp,
+  basketOutline,
+  basketSharp,
+  leafOutline,
+  leafSharp,
+  locationOutline,
+  locationSharp,
+  peopleCircleOutline,
+  peopleCircleSharp,
+} from "ionicons/icons";
 
+import { useAuth } from "../../context/AuthContext";
+
+import "./Menu.css";
 
 const appPages = [
   {
-    title: 'Inbox',
-    url: '/page/Inbox',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp
+    title: "Sitios Turisticos",
+    url: "/page/Turismo",
+    iosIcon: locationOutline,
+    mdIcon: locationSharp,
   },
   {
-    title: 'Outbox',
-    url: '/page/Outbox',
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp
+    title: "Restaurantes",
+    url: "/page/Restaurantes",
+    iosIcon: restaurantOutline,
+    mdIcon: restaurantSharp,
   },
   {
-    title: 'Favorites',
-    url: '/page/Favorites',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp
+    title: "Tienda",
+    url: "/page/Tienda",
+    iosIcon: basketOutline,
+    mdIcon: basketSharp,
   },
   {
-    title: 'Archived',
-    url: '/page/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp
+    title: "Parques",
+    url: "/page/Parques",
+    iosIcon: leafOutline,
+    mdIcon: leafSharp,
   },
   {
-    title: 'Trash',
-    url: '/page/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
+    title: "Encargado",
+    url: "/Encargado/Principal-Page",
+    iosIcon: peopleCircleOutline,
+    mdIcon: peopleCircleSharp,
   },
-  {
-    title: 'Spam',
-    url: '/page/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp
-  }
 ];
 
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+const labels = ["Family", "Friends", "Notes", "Work", "Travel", "Reminders"];
 
 const Menu = () => {
   const location = useLocation();
-  console.log("Menu", location)
+  console.log("Menu", location);
+  const { user } = useAuth();
+  console.log("menu", user);
 
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
-          {appPages.map((appPage, index) => {
-            return (
-              <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
-                  <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
-                  <IonLabel>{appPage.title}</IonLabel>
-                </IonItem>
-              </IonMenuToggle>
-            );
-          })}
-        </IonList>
+          <Link to="/home">
+            {!user ? (
+              <IonListHeader>Home</IonListHeader>
+            ) : (
+              <>
+                <IonListHeader>Home</IonListHeader>
+                <IonNote>{user.email}</IonNote>
+              </>
+            )}
+          </Link>
 
-        <IonList id="labels-list">
-          <IonListHeader>Labels</IonListHeader>
-          {labels.map((label, index) => (
-            <IonItem lines="none" key={index}>
-              <IonIcon slot="start" icon={bookmarkOutline} />
-              <IonLabel>{label}</IonLabel>
-            </IonItem>
-          ))}
+          {appPages.map((appPage, index) => {
+            if (user.rol === "turista" && appPage.title != "Encargado") {
+              return (
+                <IonMenuToggle key={index} autoHide={false}>
+                  <IonItem
+                    className={
+                      location.pathname === appPage.url ? "selected" : ""
+                    }
+                    routerLink={appPage.url}
+                    routerDirection="none"
+                    lines="none"
+                    detail={false}
+                  >
+                    <IonIcon
+                      slot="start"
+                      ios={appPage.iosIcon}
+                      md={appPage.mdIcon}
+                    />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </IonItem>
+                </IonMenuToggle>
+              );
+            } else if (user.rol === "propietario" || user.rol === "admin") {
+              return (
+                <IonMenuToggle key={index} autoHide={false}>
+                  <IonItem
+                    className={
+                      location.pathname === appPage.url ? "selected" : ""
+                    }
+                    routerLink={appPage.url}
+                    routerDirection="none"
+                    lines="none"
+                    detail={false}
+                  >
+                    <IonIcon
+                      slot="start"
+                      ios={appPage.iosIcon}
+                      md={appPage.mdIcon}
+                    />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </IonItem>
+                </IonMenuToggle>
+              );
+            }
+          })}
         </IonList>
       </IonContent>
     </IonMenu>

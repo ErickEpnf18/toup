@@ -44,7 +44,7 @@ function Login() {
     try {
       await login(user.email, user.password);
       history.push("/home");
-      console.log("nuevo usuario registrado", user);
+      console.log("usuario logueado", user);
     } catch (error) {
       console.log(error);
       if (error.code === "auth/user-not-found") {

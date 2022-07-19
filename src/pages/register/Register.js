@@ -46,7 +46,7 @@ function Register() {
     e.preventDefault();
     setError("")
     try {
-      await signup(user.email, user.password);
+      await signup(user.email, user.password, user.rol);
       // <Route component={Home} path="/page/Inbox"></Route> 
       history.push("/home");
       console.log("nuevo usuario registrado", user)
@@ -93,7 +93,6 @@ function Register() {
                     label="Rol"
                     onChange={onChange}
                   >
-                    <MenuItem value="admin">Administrador</MenuItem>
                     <MenuItem value="propietario">Propietario</MenuItem>
                     <MenuItem value="turista">Turista</MenuItem>
                   </Select>
