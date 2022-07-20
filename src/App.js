@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/protected/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import Grid from "@mui/material/Grid";
 
+
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
