@@ -13,6 +13,7 @@ import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
+import Grid from "@mui/material/Grid";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -51,42 +52,49 @@ const App = () => {
             <Resgister />
             {/* <Redirect to="/page/Inbox" /> */}
           </Route>
+          <Route path="/page/:name" exact={true}>
+            <Page />
+          </Route>
           <Route path="/login" exact={true}>
             <Login />
           </Route>
           <ProtectedRoute>
-            <IonSplitPane >
-              <Menu />
-
-              <IonRouterOutlet >
-                <Route path="/page/:name" exact={true}>
-                  <Page />
-                </Route>
-
+            <Grid container>
+              <Grid item md={4}>
+                <IonSplitPane contentId="main">
+                  <Menu />
+                  <IonRouterOutlet id="main">
+                    <Route exact path="/page/Parques" component={Parques} />
+                    <Route exact path="/page/Tienda" component={Tienda} />
+                    <Route exact path="/page/Turismo" component={Turismo} />
+                    <Route
+                      exact
+                      path="/page/Restaurantes"
+                      component={Restaurante}
+                    />
+                    <Route
+                      exact
+                      path="/Encargado/Principal-Page"
+                      component={IndexEnca}
+                    />
+                    <Route
+                      exact
+                      path="/Encargador/create-site"
+                      component={CreateEnca}
+                    />
+                    <Route
+                      path="/map/:latitud/:longitud"
+                      component={GoogleMapa1}
+                    />
+                  </IonRouterOutlet>
+                </IonSplitPane>
+              </Grid>
+              <Grid item md={8}>
                 <Route path="/home" exact={true}>
                   <Home />
                 </Route>
-                <Route exact path="/page/Parques" component={Parques} />
-                <Route exact path="/page/Tienda" component={Tienda} />
-                <Route exact path="/page/Turismo" component={Turismo} />
-                <Route
-                  exact
-                  path="/page/Restaurantes"
-                  component={Restaurante}
-                />
-                <Route
-                  exact
-                  path="/Encargado/Principal-Page"
-                  component={IndexEnca}
-                />
-                <Route
-                  exact
-                  path="/Encargador/create-site"
-                  component={CreateEnca}
-                />
-                <Route path="/map/:latitud/:longitud" component={GoogleMapa1} />
-              </IonRouterOutlet>
-            </IonSplitPane>
+              </Grid>
+            </Grid>
           </ProtectedRoute>
         </IonReactRouter>
       </AuthProvider>

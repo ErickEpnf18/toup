@@ -85,6 +85,7 @@ const Menu = () => {
           </Link>
 
           {appPages.map((appPage, index) => {
+            //let user = {rol:"pan"}//AL PRIMER RENDER NO EXISTE EL USER -> es cuestión del protected routes
             if (user.rol === "turista" && appPage.title != "Encargado") {
               return (
                 <IonMenuToggle key={index} autoHide={false}>
