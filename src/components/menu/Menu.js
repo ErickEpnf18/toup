@@ -18,6 +18,16 @@ import {
   basketSharp,
   leafOutline,
   leafSharp,
+  fastFoodOutline,
+  fastFoodSharp,
+  beerOutline,
+  beerSharp,
+  bagHandleOutline,
+  bagHandleSharp,
+  cameraOutline,
+  cameraSharp,
+  footstepsOutline,
+  footstepsSharp,
   locationOutline,
   locationSharp,
   peopleCircleOutline,
@@ -28,28 +38,60 @@ import { useAuth } from "../../context/AuthContext";
 
 import "./Menu.css";
 
+// const appPages = [
+//   {
+//     title: "Sitios Turisticos",
+//     url: "/page/Turismo",
+//     iosIcon: locationOutline,
+//     mdIcon: locationSharp,
+//   },
+//   {
+//     title: "Restaurantes",
+//     url: "/page/Restaurantes",
+//     iosIcon: restaurantOutline,
+//     mdIcon: restaurantSharp,
+//   },
+//   {
+//     title: "Tienda",
+//     url: "/page/Tienda",
+//     iosIcon: basketOutline,
+//     mdIcon: basketSharp,
+//   },
+//   {
+//     title: "Parques",
+//     url: "/page/Parques",
+//     iosIcon: leafOutline,
+//     mdIcon: leafSharp,
+//   },
+//   {
+//     title: "Encargado",
+//     url: "/Encargado/Principal-Page",
+//     iosIcon: peopleCircleOutline,
+//     mdIcon: peopleCircleSharp,
+//   },
+// ];
 const appPages = [
   {
     title: "Sitios Turisticos",
-    url: "/page/Turismo",
-    iosIcon: locationOutline,
-    mdIcon: locationSharp,
+    url: "/page/turistics",
+    iosIcon: footstepsOutline,
+    mdIcon: footstepsSharp,
   },
   {
     title: "Restaurantes",
-    url: "/page/Restaurantes",
-    iosIcon: restaurantOutline,
-    mdIcon: restaurantSharp,
+    url: "/page/restaurants",
+    iosIcon: fastFoodOutline,
+    mdIcon: fastFoodSharp,
   },
   {
     title: "Tienda",
-    url: "/page/Tienda",
-    iosIcon: basketOutline,
-    mdIcon: basketSharp,
+    url: "/page/stores",
+    iosIcon: bagHandleOutline,
+    mdIcon: bagHandleSharp,
   },
   {
     title: "Parques",
-    url: "/page/Parques",
+    url: "/page/parks",
     iosIcon: leafOutline,
     mdIcon: leafSharp,
   },
